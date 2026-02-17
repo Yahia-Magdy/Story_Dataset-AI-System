@@ -79,7 +79,6 @@ onnxruntime
 # tracing & observability
 # ===============================
 langsmith==0.3.45
-TruLens==2.6.0
 
 # ===============================
 # Providers
