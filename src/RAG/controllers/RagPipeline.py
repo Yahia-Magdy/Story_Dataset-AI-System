@@ -45,14 +45,11 @@ class RagPipeline:
         Automatically detect and load the fine-tuned SetFit model for CPU.
         """
         # Determine project root (src/)
-        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        model_path = os.path.join(project_root, "stores", "llm", "local_models", "sbert_setfit")
+        #project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        #model_path = os.path.join(project_root, "stores", "llm", "local_models", "sbert_setfit")
 
-        if not os.path.exists(model_path):
-            raise FileNotFoundError(f"Cannot find fine-tuned model at {model_path}")
-
-        print(f"Loading classification model from {model_path}...")
-        model = SetFitModel.from_pretrained(model_path)
+        #print(f"Loading classification model from {model_path}...")
+        model = SetFitModel.from_pretrained("Yahia-123/Setfit_model")
         return model
     
     def load_genres(self):
