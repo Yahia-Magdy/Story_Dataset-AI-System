@@ -16,7 +16,7 @@ ipykernel==6.29.5
 # ===============================
 # Embeddings (E5-compatible)
 # ===============================
-sentence-transformers==5.2.2
+sentence-transformers==5.2.3
 ctransformers==0.2.27
 # ===============================
 # Hugging Face ecosystem
