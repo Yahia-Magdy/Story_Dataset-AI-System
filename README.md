@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ### 6. Ingest Qdrant Vector Database
 ```bash
-python -m controllers.ingest_qdrant
+python -m RAG.controllers.ingest_qdrant
 ```
 
 ### 7. Run the Application
