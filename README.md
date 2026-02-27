@@ -39,9 +39,13 @@ pip install -r requirements.txt
 python -m RAG.controllers.ingest_qdrant
 ```
 
-### 7. Run the Application
+### 7. Run the Application using Streamlit
 ```bash
-streamlit run main.py
+streamlit run app.py
+```
+### 8. Run the Application using FastAPI
+```bash
+uvicorn main:app --reload  
 ```
 # Project Structure
 

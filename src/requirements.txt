@@ -69,6 +69,8 @@ rapidfuzz==3.14.3
 # Optional API layer
 # ===============================
 streamlit==1.29.0
+fastapi[standard]==0.133.1
+uvicorn[standard]==0.41.0
 
 # ===============================
 # VRAM / GPU monitoring
