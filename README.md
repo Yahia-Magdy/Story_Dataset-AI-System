@@ -45,7 +45,7 @@ streamlit run app.py
 ```
 ### 8. Run the Application using FastAPI
 ```bash
-uvicorn main:app --reload  
+Start-Process uvicorn -ArgumentList "main:app" 
 ```
 # Project Structure
 
