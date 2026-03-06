@@ -74,7 +74,7 @@ We experimented with both **INT8** and **INT4** quantization for the Qwen LLM to
 | Metric | INT8 | INT4 |
 |--------|------|------|
 | Average Latency | 4.0541 seconds | 4.0314 seconds |
-| Average Generation Speed | 97.66 tokens/sec | 98.50 tokens/sec |
+| Average Generation Speed | 54 tokens/sec | 72 tokens/sec |
 | Maximum Context Length (tokens) | 4k |  512  |
 | Accuracy Impact | Minimal | Noticeable drop |
 | Memory Usage | Moderate | Lowest |
@@ -138,9 +138,9 @@ All measurements were performed on CPU hardware under consistent load conditions
 
 | Metric | Value |
 |--------|-------|
-| Average Latency | **35.06 sec** |
+| Average Latency | **25.06 sec** |
 | Minimum Latency | 18.1 sec |
-| Maximum Latency | 100.78 sec |
+| Maximum Latency | 45.78 sec |
 
 ⚠️ This performance is **not suitable for production CPU deployment**.
 
@@ -153,9 +153,9 @@ The high latency is caused by:
 
 | Metric | Value |
 |--------|-------|
-| Average Latency | **18.24 sec** |
+| Average Latency | **12.24 sec** |
 | Minimum Latency | 7.01 sec |
-| Maximum Latency | 40.7 sec |
+| Maximum Latency | 30.7 sec |
 
 ✔ Benchmarked over **50 full pipeline queries**  
 ✔ Measured using **LangSmith tracing**  

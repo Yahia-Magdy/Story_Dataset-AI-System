@@ -11,6 +11,22 @@ from langchain_core.tracers.context import tracing_v2_enabled
 from RAG.controllers.RagPipeline import RagPipeline
 from RAG.helpers.config import get_settings
 from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import Response
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import prometheus_client
+
+REQUEST_COUNT = Counter(
+    "fastapi_requests_total",
+    "Total number of requests",
+    ["endpoint"]
+)
+
+REQUEST_LATENCY = Histogram(
+    "fastapi_request_latency_seconds",
+    "Latency per endpoint",
+    ["endpoint"]
+)
+
 
 
 # -------------------------------
@@ -47,6 +63,7 @@ class QueryRequest(BaseModel):
 @app.on_event("startup")
 async def load_pipeline():
     global rag
+    
     rag = RagPipeline(
         qdrant_db_path=QDRANT_PATH,
         collection_name=COLLECTION_NAME,
@@ -62,6 +79,8 @@ async def load_pipeline():
 @app.post("/ask")
 async def ask_question(request: QueryRequest):
     start_time = time.time()
+    
+    REQUEST_COUNT.labels(endpoint="ask").inc()
 
     def task():
         with tracing_v2_enabled(project_name="Story-Retrieval", client=client):
@@ -70,6 +89,7 @@ async def ask_question(request: QueryRequest):
     answer = await run_in_threadpool(task)
 
     latency = time.time() - start_time
+    REQUEST_LATENCY.labels(endpoint="ask").observe(latency)
     print(f"[Chatbot] Response Time: {latency:.4f} seconds")
 
     return {
@@ -80,6 +100,7 @@ async def ask_question(request: QueryRequest):
 @app.post("/classify")
 async def classify_text(request: QueryRequest):
     start_time = time.time()
+    REQUEST_COUNT.labels(endpoint="classify").inc()
 
     def task():
         with tracing_v2_enabled(project_name="Story-Retrieval", client=client):
@@ -88,11 +109,17 @@ async def classify_text(request: QueryRequest):
     genre = await run_in_threadpool(task)
 
     latency = time.time() - start_time
+    REQUEST_LATENCY.labels(endpoint="classify").observe(latency)
     print(f"[Classifier] Response Time: {latency:.4f} seconds")
 
     return {
         "genre": genre,
     }
+
+@app.get("/metrics")
+async def metrics():
+    data = generate_latest()
+    return Response(content=data, media_type=CONTENT_TYPE_LATEST)
 
 
 # -------------------------------

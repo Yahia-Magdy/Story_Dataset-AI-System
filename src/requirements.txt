@@ -17,7 +17,7 @@ ipykernel==6.29.5
 # Embeddings (E5-compatible)
 # ===============================
 sentence-transformers==5.2.3
-ctransformers==0.2.27
+#ctransformers==0.2.27
 # ===============================
 # Hugging Face ecosystem
 # ===============================
@@ -75,14 +75,15 @@ uvicorn[standard]==0.41.0
 # ===============================
 # VRAM / GPU monitoring
 # ===============================
-optimum-onnx[onnxruntime]
-onnxruntime
+#optimum-onnx[onnxruntime]
+#onnxruntime
 # ===============================
 # tracing & observability
 # ===============================
 langsmith==0.3.45
+prometheus-client==0.24.1
 
 # ===============================
 # Providers
 # ===============================
-groq==1.0.0
+#groq==1.0.0

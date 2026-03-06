@@ -9,43 +9,47 @@ Follow these steps to set up and run the system using **conda**.
 
 ## Setup & Run Instructions
 
-### 1. Clone the Repository
+### 1. Setup you command line interface for better readability
+```bash
+export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
+```
+
+### 2. Clone the Repository
 ```bash
 git clone <your-repo-url>
 ```
 
-### 2. Navigate to the Project Directory
+### 3. Navigate to the Project Directory
 ```bash
 cd src
 ```
 
-### 3. Create a Conda Environment
+### 4. Create a Conda Environment
 ```bash
 conda create -n myenv python=3.12 -y
 ```
 
-### 4. Activate the Conda Environment
+### 5. Activate the Conda Environment
 ```bash
 conda activate myenv
 ```
 
-### 5. Install Required Packages
+### 6. Install Required Packages
 ```bash
 pip install -r requirements.txt
 ```
 
-### 6. Ingest Qdrant Vector Database
+### 7. Ingest Qdrant Vector Database
 ```bash
 python -m RAG.controllers.ingest_qdrant
 ```
-
-### 7. Run the Application using Streamlit
-```bash
-streamlit run app.py
-```
 ### 8. Run the Application using FastAPI
 ```bash
-Start-Process uvicorn -ArgumentList "main:app" 
+Start-Process uvicorn -ArgumentList "main:app"  or uvicorn main:app --reload
+```
+### 9. Monitor Prometheus Metrics
+```bash
+- Access the Prometheus metrics endpoint at `http://localhost:8000/metrics` 
 ```
 # Project Structure
 
